@@ -1,0 +1,15 @@
+import socket
+
+UDP_IP = "192.168.1.2"
+UDP_PORT = 5005
+#Sample Command
+COMMAND = "010110010110111101110101011100100010000001100001001000000100111001100101011100100110010000100001"
+
+print "UDP Target IP:", UDP_IP
+print "UDP Target Port:", UDP_PORT
+print "Command:", COMMAND
+
+sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+sock.sendto(COMMAND, (UDP_IP,UDP_PORT))
+
+
