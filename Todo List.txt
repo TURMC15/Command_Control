@@ -6,8 +6,6 @@ NASA Robotics Mining Competition
 As of 11/19/2015
 ****************************************************************
 Improve the command_get program:
-- Segment the program into controller_detect and command_get.
-
 - Remove any extraneous elements from the program.
 
 - Implement a pause to reduce the amount of data coming from the controller. (Supposedly this program has problems with handling real-time. All I’ve done is watch the data come in, not see it in action. I’ll look into it.)
