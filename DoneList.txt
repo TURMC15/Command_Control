@@ -1,0 +1,14 @@
+Programming Done List
+Benjamin Camp
+(Name of bot?) Athene Cunicularia (Burrowing Owl :P)
+NASA Robotics Mining Competition
+
+
+
+
+As of 11/25/2015
+****************************************************************
+RESOLVED command_get program:
+- Pause not apparently needed
+
+- Raw data segmented into usable list
