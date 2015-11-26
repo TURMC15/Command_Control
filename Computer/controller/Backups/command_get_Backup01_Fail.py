@@ -1,21 +1,48 @@
 """
 Handling raw data inputs example
-Version 0.0.2
+Version 0.0.1
 
 Ben Camp
 Modified from example
 """
 from time import sleep
 from msvcrt import kbhit
-import re
-import pywinusb.hid as hid
 
-#Regex seems to have done the deed.
+import pywinusb.hid as hid
+numbers_from_data = []
+    
+    
+
+"""
+My first test, obviously over-complicated. 
+Something went seriously wrong in the transfer from stuff_from_data to numbers_from_data.
+I'm going with: I don't really understand lists in Python yet.
+"""
+
 def sample_handler(data):
     stuff_from_data = format(data)
-    numbers_from_data = re.findall(r'\d+', stuff_from_data)
-    print numbers_from_data
+    position = 0
+    first = True
+    for x in stuff_from_data:
+        if x.isdigit():
+            if first:
+                numbers_from_data.insert(position, x)
+                first = False
+            else:
+                temp = numbers_from_data[position]
+                temp *= 10
+                temp += x 
+                numbers_from_data[position] = temp
+                
+        elif x == ',':
+            print numbers_from_data[position]
+            print "******** ", position, " *************"
+            first = True
+            position += 1
     
+            
+                
+            
     
 def raw_test():
     # simple test
@@ -49,7 +76,7 @@ def raw_test():
                 print("\nWaiting for data...\nPress any (system keyboard) key to stop...")
                 while not kbhit() and device.is_plugged():
                     #just keep the device opened to receive events
-                    sleep(2)
+                    sleep(10)
                 return
             finally:
                 device.close()
