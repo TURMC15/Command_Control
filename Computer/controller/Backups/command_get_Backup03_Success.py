@@ -1,6 +1,6 @@
 """
 Handling raw data inputs example
-Version 0.0.2
+Version 0.0.3
 
 Ben Camp
 Modified from example
@@ -16,6 +16,13 @@ def sample_handler(data):
     stuff_from_data = format(data)
     numbers_from_data = re.findall(r'\d+', stuff_from_data)
     print numbers_from_data
+    size_n = numbers_from_data.__len__() - 1
+    x = 0
+    while x < size_n:
+        file_output.write(numbers_from_data[x])
+        file_output.write(', ')
+        x += 1
+    file_output.write('\n')
     
 def raw_test():
     # simple test
@@ -67,4 +74,6 @@ if __name__ == '__main__':
         # allow to show encoded strings
         import codecs
         sys.stdout = codecs.getwriter('mbcs')(sys.stdout)
+    file_output = open('output.txt', 'a')
     raw_test()
+    file_output.close()

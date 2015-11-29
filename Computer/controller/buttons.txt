@@ -1,0 +1,37 @@
+Controller has 15 outputs
+I'm guessing we're supposed to take the average of the double analog values
+
+Left Analog: 
+	Up: 0,0 [4, 5]
+	Down: 255, 255 [4, 5]
+	Right: 255, 255 [2, 3]
+	Left: 0, 0 [2, 3]
+Right Analog:
+	Up: 0,0 [8, 9]
+	Down: 255, 255 [8, 9]
+	Right: 255, 255 [6, 7]
+	Left: 0, 0 [6, 7]
+
+Left Trigger: 255 [11]
+Right Trigger: 0 [11]
+Neither/Both: 128
+
+A: 1 [12]
+B: 2 [12]
+X: 4 [12]
+Y: 8 [12]
+Left Bumper: 16 [12]
+Right Bumper: 32 [12]
+Select: 64 [12]
+Start: 128 [12]
+
+Left Analog Pressed: 1 [13]
+Right Analog Pressed: 2 [13]
+Up: 4 [13]
+Up/Right: 8 [13]
+Right: 12 [13]
+Right/Down: 16 [13]
+Down: 20 [13]
+Down/Left: 24 [13]
+Left: 28 [13]
+Left/Up: 32 [13]
