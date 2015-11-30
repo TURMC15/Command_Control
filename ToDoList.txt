@@ -3,6 +3,74 @@ Benjamin Camp
 (Name of bot?) Athene Cunicularia (Burrowing Owl :P)
 NASA Robotics Mining Competition
 
+As of 11/30/2015
+****************************************************************
+Improve the command_get program:
+- Send array from command_get to command_interpret
+
+- Remove any extraneous elements from the program. (Not certain there are any)
+
+- Probably some other stuff I'm unaware of or have forgotten.
+
+
+
+Improve command_interpret program:
+- Format the data from the controller into simple commands for the bot.
+
+- Probably some other stuff I'm unaware of or have forgotten.
+
+
+
+Improve controller_gui program:
+- Create GUI to show which buttons are doing what.
+
+- Probably some other stuff I'm unaware of or have forgotten.
+
+
+
+Improve command_send program:
+- Needs to receive the values from the command_interpret program and send them to the router.
+
+- Probably some other stuff I'm unaware of or have forgotten.
+
+
+
+
+Improve camera_receive program:
+- Won't be able to use vlc player. Need to set up a decompression algorithm.
+Set up communications:
+- Set the routers and Pi up with whatever computer we will be using for the competition.
+
+- Ensure that the Pi and the computer can receive signals from each other at the same time.
+
+- Implement SSID channel switching (Make damn sure we are on the right channel, this will get us disqualified if we are not).
+
+- Implement the spectral mask (I have no idea what that is or if it even a programmer issue).
+
+- (Optional) Implement encryption.
+
+- Remember to monitor the bandwidth usage. We can't go over an average of 5000 kb/s.
+
+- Probably some other stuff I'm unaware of or have forgotten.
+
+
+
+Data compression:
+- Implement algorithm to compress the visual data coming from the Pi. Most likely will use Python implementation, maybe use onboard Wolfram Alpha if demonstratably better, which is unlikely given that the program's overhead is likely to be large. Please don't forget to make the decompression part...
+
+- Stream or burst?
+
+- Probably some other stuff I'm unaware of or have forgotten.
+
+
+
+Artificial Intelligence:
+- Because I want this really, really bad.. Right now there is no point until we have everything else ready.
+
+
+
+Other stuff I haven't written:
+
 
 
 

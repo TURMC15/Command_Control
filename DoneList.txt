@@ -4,6 +4,27 @@ Benjamin Camp
 NASA Robotics Mining Competition
 
 
+As of 11/30/2015
+****************************************************************
+RESOLVED command_get program:
+- Pause not apparently needed.
+
+- Raw data segmented into usable list.
+
+
+RESOLVED command_interpret program:
+- Raw data to specific buttons mapped.
+
+
+RESOLVED controller_gui program:
+
+
+RESOLVED command_send program:
+
+
+RESOLVED camera_receive program:
+
+
 
 
 As of 11/25/2015
