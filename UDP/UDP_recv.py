@@ -23,12 +23,12 @@ def main():
         data, client_addr = srvr.recvfrom(MAX_BFR_SIZE)
 
         #display the message
-        print "received %s\n from %s" % (data, client_addr)
+        print 'received: "%s"\nfrom %s' % (data, client_addr)
         print "message is %s bytes" % len(data)
         # acknowledge the data
         if data:
             sent = srvr.sendto(ack, client_addr)
-            print "sent acknowledgement to %s" % ack
+            print "sent acknowledgement to %s \n" % str(client_addr)
 
 
 
