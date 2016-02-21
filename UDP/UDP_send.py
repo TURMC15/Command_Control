@@ -18,9 +18,9 @@ def main():
         sent = sock.sendto(msg, SERVER_ADDR)
 
         #wait for a response
-        nbytes, addr = sock.recvfrom(4096)  
+        ack, addr = sock.recvfrom(4096)  
 
-        print "received %s bytes from %s as acknowledgement" % (nbytes, addr)
+        print "received %s bytes from %s as acknowledgement" % (len(ack), addr)
 
 if __name__ == '__main__':
     main()
