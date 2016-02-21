@@ -21,6 +21,8 @@ def main():
         ack, addr = sock.recvfrom(4096)  
 
         print "received %s bytes from %s as acknowledgement" % (len(ack), addr)
+        print 'Acknowledgement message is "%s"\n' % ack  
+
 
 if __name__ == '__main__':
     main()
