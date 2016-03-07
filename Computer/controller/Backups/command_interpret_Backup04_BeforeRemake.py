@@ -5,11 +5,13 @@ Version 0.0.1
 
 Interpreting the data from command_get
 """
+from _random import Random
+
+
 
 
 
 def whats_pressed (list_Of_Input):
-    print "whats_pressed"
     button_A_Pressed = False
     button_B_Pressed = False
     button_X_Pressed = False
@@ -144,80 +146,4 @@ def whats_pressed (list_Of_Input):
     temp = (int(list_Of_Input[5]) + int(list_Of_Input[6])) / 2
     right_Analog_X = temp
  
-    if button_A_Pressed == True:
-        print "A ",
 
-    if button_B_Pressed == True:
-        print "B ",
-
-    if button_X_Pressed == True:
-        print "X ",
-
-    if button_Y_Pressed == True:
-        print "Y ",
-    
-    if left_Bumper_Pressed == True:
-        print "LB",
-    
-    if right_Bumper_Pressed == True:
-        print "RB",
-        
-    if select_Pressed == True:
-        print "Sel",
-        
-    if start_Pressed == True:
-        print "Start",
-
-    if left_Analog_Pressed == True:
-        print "LAnalog",
-        
-    if right_Analog_Pressed == True:
-        print "rAnalog",
-        
-    if up_Pressed == True:
-        print "up",
-        
-    if up_Right_Pressed == True:
-        print "up_right",
-        
-    if right_Pressed == True:
-        print "right",
-        
-    if right_Down_Pressed == True:
-        print "right_down",
-        
-    if down_Pressed == True:
-        print "down",
-        
-    if down_Left_Pressed == True:
-        print "down_left",
-        
-    if left_Pressed == True:
-        print "left",
-        
-    if left_Up_Pressed == True:
-        print "left_up",
-
-    if left_Analog_X != 0:
-        print "left_Analog_X: ",
-        print left_Analog_X
-        
-    if left_Analog_Y != 0:
-        print "Left_Analog_Y: ",
-        print left_Analog_Y
-        
-    if right_Analog_X != 0:
-        print "Right_Analog_X: ",
-        print right_Analog_X
-    
-    if right_Analog_Y != 0:
-        print "Right_Analog_Y: ",
-        print right_Analog_Y
-
-    if left_Trigger != 0:
-        print "Left_Trigger: ",
-        print left_Trigger
-        
-    if right_Trigger != 0:
-        print "Right_Trigger: ",
-        print right_Trigger

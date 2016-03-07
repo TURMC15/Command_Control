@@ -1,0 +1,11 @@
+communications_Readme
+(Name of bot?) Athene Cunicularia (Burrowing Owl :P)
+NASA Robotics Mining Competition
+
+As of 12/21/2015
+****************************************************************
+
+command_receive:
+	
+	This module contains the definition that will listen for the commands from the 
+	router. It then sends the command directly to the command_interpret module.
