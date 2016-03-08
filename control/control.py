@@ -4,7 +4,7 @@
 import serial
 
 #open the port
-ser = serial.Serial('COM3', 9600)
+ser = serial.Serial('/dev/ttyUSB1', 9600)
 
 while 1:
     cont_data = ser.readline()

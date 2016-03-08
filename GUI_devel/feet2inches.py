@@ -3,8 +3,8 @@
 
 
 #headers
-from tkinter import *
-from tkinter import ttk
+from Tkinter import *
+import ttk
 
 #function definitions
 def calculate(*args):
