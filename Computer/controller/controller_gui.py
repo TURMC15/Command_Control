@@ -5,8 +5,9 @@ from msvcrt import kbhit
 import re
 import pywinusb.hid as hid
 from _random import Random
-from Computer.controller.test import test
-
+from Computer.controller.sendToP import test
+from Computer.controller.sendToA import sendToA
+from threading import Thread
 class GUI(Frame):
 
 
@@ -345,11 +346,9 @@ class GUI(Frame):
             string = string + str(self.left_Trigger)
 
             string = string + " "
-            string = string + str(self.left_Trigger)
+            string = string + str(self.right_Trigger)
         
-            
-            
-            test(string)
+            test(string, "Hello")
             
     def getStart(self):
         all_hids = hid.find_all_hid_devices()
