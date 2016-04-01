@@ -8,18 +8,14 @@ Enable+ to nothing
 Enable- to nothing
 */
 
-int sensorPin = A3;
-int sensorValue = 0;
 void stepperdriver(int,int, int, int);
 
 void setup() {                
-  pinMode(8, OUTPUT);     //direction pin
-  pinMode(9, OUTPUT); //step pin
 }
 
 void loop() {
   //A 250 millisecond delay is the fastest the stepper can be driven
-  stepperdriver(250,0, 9, 8);
+  stepperdriver(250,1, 9, 8);
  }
 
  //Input: delaytime, stepperdirection, steppercontrolpin, stepperdirectionpin
@@ -31,9 +27,9 @@ void loop() {
   pinMode(stepperdirectionpin, OUTPUT);
   pinMode(steppercontrolpin, OUTPUT);
   if(stepperdirection == 1){
-    digitalWrite(stepperdirection, LOW);
+    digitalWrite(stepperdirectionpin, LOW);
   } else {
-    digitalWrite(stepperdirection, HIGH);
+    digitalWrite(stepperdirectionpin, HIGH);
   }
   digitalWrite(steppercontrolpin, HIGH);
   delayMicroseconds(delaytime);          
