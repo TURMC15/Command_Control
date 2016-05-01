@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import socket
+import math
 
 def main():
     REC_IP = "192.168.0.100" #receiving machines IP
@@ -10,36 +11,21 @@ def main():
 
     #create the socket
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    wflag = 0
-    aflag = 0
-    sflag = 0
-    dflag = 0
+
+    k = raw_input("Choose a Constant to scale inputs by.\nMax is 13.6\n")
+
     while(1):
-        msg = raw_input("Enter Message\n")
-        if (msg == "w"):
-            wflag = wflag ^ 1
-            aflag = 0
-            sflag = 0
-            dflag = 0
-            cmd = "D1000"
-        if (msg == "a"):
-            wflag = 0
-            aflag = aflag ^ 1
-            sflag = 0
-            dflag = 0
-            cmd = "T-512"
-        if (msg == "s"):
-            wflag = 0
-            aflag = 0
-            sflag = sflag ^ 1
-            dflag = 0
-            cmd = "T512"
-        if (msg == "d"):
-            wflag = 0
-            aflag = 0
-            sflag = 0
-            dflag = dflag ^ 1
-            cmd = "D-1000"
+        # msg1 and msg2 will be the inputs from the controller
+        msg1 = raw_input("Left Motor\n")
+        msg2 = raw_input("Right Motor\n")
+        cmd1 = str(math.floor(float(k)*float(msg1)))
+        cmd2 = str(math.floor(float(k)*float(msg2)))
+        # strip decimal values (only integers are valid inputs)
+        cmd1 = cmd1.split('.')[0]
+        cmd2 = cmd2.split('.')[0]
+        cmd = cmd1+"."+cmd2
+
+        print cmd
         #send message
         sent = sock.sendto(cmd, SERVER_ADDR)
 
