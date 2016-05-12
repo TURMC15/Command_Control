@@ -14,24 +14,24 @@
 #include <Ethernet.h>
 #include <EthernetUdp.h>         // UDP library from: bjoern@cs.stanford.edu 12/30/2008
 
-void actuatordriver (int, int, int);
-void stepperdriver(int,int, int, int);
+void actuatordriver (char, int, int);
+void stepperdriver(int,char, int, int);
 void conveyerdriver(boolean, int);
 void augerdriver(boolean, int);
 
 //Lazy global variables
-int ACTUATOR_HOT;
-int ACTUATOR_GROUND;
-int ACTUATOR_DIRECTION_CONTROL = 0;
+int ACTUATOR_HOT = 7;
+int ACTUATOR_GROUND = 6;
+char ACTUATOR_DIRECTION_CONTROL = '0';
 
-int STEPPER_CONTROL_PIN = 9;
-int STEPPER_DIRECTION_PIN = 8;
-int STEPPER_DIRECTION_CONTROL = 0;
+int STEPPER_CONTROL_PIN = 5;
+int STEPPER_DIRECTION_PIN = 4;
+char STEPPER_DIRECTION_CONTROL = '0';
 
-int CONVEYER_PIN;
+int CONVEYER_PIN = 3;
 boolean CONVEYER_ON = false;
 
-int AUGER_PIN;
+int AUGER_PIN = 2;
 boolean AUGER_ON = false;
 
 // Enter a MAC address and IP address for your controller below.
@@ -73,42 +73,24 @@ void setup() {
 void loop() {
   // if there's data available, read a packet
   int packetSize = Udp.parsePacket();
-  if (packetSize) {
-    Serial.print("Received packet of size ");
-    Serial.println(packetSize);
-    Serial.print("From ");
+  if (packetSize == 4) {
     IPAddress remote = Udp.remoteIP();
-    for (int i = 0; i < 4; i++) {
-      Serial.print(remote[i], DEC);
-      if (i < 3) {
-        Serial.print(".");
-      }
-    }
-    Serial.print(", port ");
-    Serial.println(Udp.remotePort());
 
     // read the packet into packetBufffer
     Udp.read(packetBuffer, UDP_TX_PACKET_MAX_SIZE);
-    Serial.println("Contents:");
-    Serial.println(packetBuffer);
-  
+    
     ACTUATOR_DIRECTION_CONTROL = packetBuffer[0];
     STEPPER_DIRECTION_CONTROL = packetBuffer[1];
-    if (packetBuffer[2] != 1)
+    if (packetBuffer[2] != '1')
       CONVEYER_ON = false;
     else
       CONVEYER_ON = true;
 
-    if (packetBuffer[3] != 1)
+    if (packetBuffer[3] != '1')
       AUGER_ON = false;
     else
       AUGER_ON = true;
       
-    actuatordriver(ACTUATOR_DIRECTION_CONTROL, ACTUATOR_HOT, ACTUATOR_GROUND);
-    stepperdriver(250,STEPPER_DIRECTION_CONTROL, STEPPER_CONTROL_PIN, STEPPER_DIRECTION_PIN);
-    conveyerdriver(CONVEYER_ON, CONVEYER_PIN);
-    augerdriver(AUGER_ON, AUGER_PIN);
-    
 
     // send a reply to the IP address and port that sent us the packet we received
     Udp.beginPacket(Udp.remoteIP(), Udp.remotePort());
@@ -117,25 +99,35 @@ void loop() {
     Udp.endPacket();
     
   }
+  
+    Serial.println("Contents:");
+    Serial.println(packetBuffer);
   delay(10);
+  actuatordriver(ACTUATOR_DIRECTION_CONTROL, ACTUATOR_HOT, ACTUATOR_GROUND);
+  stepperdriver(250,STEPPER_DIRECTION_CONTROL, STEPPER_CONTROL_PIN, STEPPER_DIRECTION_PIN);
+  conveyerdriver(CONVEYER_ON, CONVEYER_PIN);
+  augerdriver(AUGER_ON, AUGER_PIN);
 }
 
-void actuatordriver (int mode, int hotRelay, int gndRelay) {
+void actuatordriver (char mode, int hotRelay, int gndRelay) {
   
   // off state (both relays switched to ground)
-  if (mode == 0){
+  if (mode == '0'){
+    Serial.println("Actuator off");
     digitalWrite(hotRelay, LOW);
     digitalWrite(gndRelay, LOW);
   }
   
   // extend state
-  else if (mode == 1){ 
+  else if (mode == '1'){ 
+    Serial.println("Actuator extend");
     digitalWrite(hotRelay, LOW);
     digitalWrite(gndRelay, HIGH);
   }
 
   // retract state
-  else if (mode == 2){
+  else if (mode == '2'){
+    Serial.println("Actuator retract");
     digitalWrite(hotRelay, HIGH);
     digitalWrite(gndRelay, LOW);
   }
@@ -143,32 +135,42 @@ void actuatordriver (int mode, int hotRelay, int gndRelay) {
 
 void augerdriver(boolean on, int pin){
   if (on){
+    Serial.println("Auger on");
     digitalWrite(pin, HIGH);
   }
   else{
+    Serial.println("Auger off");
     digitalWrite(pin, LOW);
   }
 }
 
 void conveyerdriver(boolean on, int pin){
   if (on){
+    Serial.println("Conveyer on");
     digitalWrite(pin, HIGH);
   }
   else{
+    Serial.println("Conveyer off");
     digitalWrite(pin, LOW);
   }
 }
 
-void stepperdriver(int delaytime,int stepperdirection, int steppercontrolpin, int stepperdirectionpin){
-    if(stepperdirection == 1){
-      digitalWrite(stepperdirectionpin, LOW);
-    } else {
-      digitalWrite(stepperdirectionpin, HIGH);
+void stepperdriver(int delaytime, char stepperdirection, int steppercontrolpin, int stepperdirectionpin){
+    if (stepperdirection != '0'){
+      if(stepperdirection == '1'){
+        Serial.println("Stepper Forward");
+        digitalWrite(stepperdirectionpin, LOW);
+      } 
+      else if(stepperdirection == '2'){
+        Serial.println("Stepper Backward");
+        digitalWrite(stepperdirectionpin, HIGH);
+      }
+      digitalWrite(steppercontrolpin, HIGH);
+      delayMicroseconds(delaytime);
+    
+      digitalWrite(steppercontrolpin, LOW);
+      delayMicroseconds(delaytime);
     }
-    digitalWrite(steppercontrolpin, HIGH);
-    delayMicroseconds(delaytime);          
-    digitalWrite(steppercontrolpin, LOW); 
-    delayMicroseconds(delaytime);
  }
 
 
